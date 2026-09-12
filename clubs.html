@@ -1,0 +1,1295 @@
+<!--
+===================================================================
+DUGGA 1.0 — PANDAL HOPPING & CLUBS UPDATE SUMMARY
+===================================================================
+1. DEDUPLICATION (9 duplicate/near-duplicate entries removed):
+   - "Bagbazar Sarbojanin" (Kolkata) — Removed consecutive duplicate entry.
+   - "Ekdalia Evergreen Club" (Barasat) — Removed false duplicate in Barasat;
+     retained authentic world-famous Kolkata/Ballygunge entry.
+   - "Behala Nutan Dal" (Kolkata) — Removed duplicate entry (with Cyrillic character).
+   - "Chetla Agrani" (Kolkata) — Removed duplicate, unified with "Chetla Agrani Club".
+   - "Shibpur Sastitala Durga Puja" (Howrah) — Removed duplicate entry.
+   - "Milanpally Sarbojanin Durga Puja Committee" (Siliguri) — Removed duplicate entry.
+   - "Rathkhola Sporting Club" (Siliguri) — Removed duplicate entry.
+   - "Salugara Durga Puja Committee" (Siliguri) — Removed duplicate entry.
+   - "Amtala Yuba Samity" (Siliguri) — Removed near-duplicate; retained "Amtala Yuba Sangha".
+
+2. EXPANSION (32 new verified pandals added from durgapujakolkata.in/paras):
+   - 22 Starter Batch: Ultadanga Pallyshree, Uddipani (Park Circus Sarbojanin Durgotsab),
+     Shyampukur Sanghatirtha Durga Puja Samity, Chotushkone Park Saradia Sammilani,
+     Ariadaha Jubak Sangha, Ramkrishapur Sarbojanin Durgotsab, Alpha Atheletic Association,
+     Adi Lake Pally, Debdaru Fatak Sarbojanin Durgotsab, Hartaki Bagan Sarbojanin Durgotsab,
+     Barisha Tarun Tirtha, Beleghata Sarbojanin Durga Puja Committee, Behala 29 Palli,
+     Nirvik Sangha, Keshtopur Prafulla Kanan Paschim Adhibasi Brinda,
+     Sobhabazar Burtolla Sarbojanin Durgotsab, Ajeyo Sanhati,
+     Tekiapara Sarbojanin Durgotsab Committee, Jorabagan Chhatra Sanghaati,
+     Udayan Sangha, Boral Sukanta Sangha, Beliaghata Nabamilan.
+   - 10 Additional Iconic Pandals: Chorbagan Sarbojanin Durgotsab,
+     Manicktala Chaltabagan Lohapatty Durga Puja, Telengabagan Sarbojanin Durgotsab,
+     Kashi Bose Lane Durga Puja Samity, Pathuriaghata Pancher Palli, Haridevpur 41 Pally,
+     Salt Lake FD Block Sarbojanin, Salt Lake BJ Block Sarbojanin,
+     Salt Lake AK Block Sarbojanin, Salt Lake AJ Block Sarbojanin.
+   - Preserved deduplication for "64 Pally Durga Puja" & "Hatibagan Sarbojanin".
+
+3. REAL GOOGLE MAP EMBED (Task 2):
+   - Added interactive Google Maps iframe embed inside each club card,
+     pinned dynamically to the club's `query` location.
+   - Retained external Google Maps link button for full direction guidance.
+
+4. PUJA MEMORIES GALLERY LINK (Task 3):
+   - Added link to the new Puja Memories Gallery (gallery.html).
+===================================================================
+-->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dugga — Clubs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7efe2;
+            color: #3b210d;
+        }
+
+        .top {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: white;
+    padding: 22px;
+    text-align: center;
+}
+
+        .top h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .top p {
+            margin: 8px 0 0;
+        }
+
+        .location-bar {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .location-bar input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .clubs-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 10px 20px 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin: 15px 0;
+        }
+
+        #clubList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .club-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            transition: 0.2s;
+        }
+
+        .club-card:hover {
+            transform: translateY(-3px);
+        }
+
+       .club-name {
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+        .club-area {
+            color: #080808;
+            margin-bottom: 12px;
+        }
+
+        .map-embed-wrapper {
+            margin: 12px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 160px;
+            background: rgba(0, 0, 0, 0.06);
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-embed-wrapper iframe {
+            width: 100%;
+            height: 160px;
+            border: 0;
+            display: block;
+        }
+
+        .map-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #0be1e9;
+            color: #141414;
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .map-btn:hover {
+            background: #0e7ac2;
+        }
+
+        #seeMoreBtn {
+            display: block;
+            margin: 30px auto 10px;
+            padding: 13px 28px;
+            border: none;
+            border-radius: 25px;
+            background: #7b3f00;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #seeMoreBtn:hover {
+            background: #029df7;
+        }
+
+        .back-btn {
+            display: block;
+            width: fit-content;
+            margin: 10px auto 30px;
+            padding: 10px 20px;
+            border-radius: 22px;
+            background: #ddd;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+        @font-face {
+    font-family: "Times New Roman";
+    src: url("assets/font/Times_New_Roman.ttf");
+}
+
+.top h1 {
+    font-family: "Times New Roman", sans-serif;
+}
+body {
+    background-image: url("assets/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title {
+    font-family: "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="top">
+        <h1> Pandal Hopping </h1>
+        <p>**পুজো উপভোগ করুন**
+</p>
+    </div>
+
+    <div class="location-bar">
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Club / Area / City search করুন..."
+        >
+    </div>
+
+    <div class="clubs-container">
+
+        <h2 class="section-title">
+             CLUBS / PANDALS
+        </h2>
+        
+
+        <div id="clubList"></div>
+
+        <button id="seeMoreBtn">
+            See More Clubs →
+        </button>
+
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="index.html" class="back-btn" style="margin: 10px 0 30px;">
+                ← Back to Home
+            </a>
+            <a href="gallery.html" class="back-btn" style="margin: 10px 0 30px; background: #ffd34e; color: #101010; font-weight: bold;">
+                📸 Puja Gallery →
+            </a>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /*
+        ==================================================
+        DUGGA — CLUB DATA
+        ==================================================
+        */
+        // =====================================================
+// WEST BENGAL CITY LOCATIONS
+// =====================================================
+
+const cityCoordinates = {
+
+"Kolkata": [22.5726, 88.3639],
+"Howrah": [22.5958, 88.2636],
+"Siliguri": [26.7271, 88.3953],
+"Barasat": [22.7215, 88.4829],
+"Asansol": [23.6739, 87.1369],
+"Durgapur": [23.5204, 87.3119],
+"Bardhaman": [23.2324, 87.8615],
+"Chandannagar": [22.8640, 88.3670],
+"Serampore": [22.7514, 88.3422],
+"Barrackpore": [22.7660, 88.3680],
+"Sodepur": [22.6990, 88.3900],
+"Sonarpur": [22.4480, 88.3910],
+"Baruipur": [22.3654, 88.4325],
+"Krishnanagar": [23.4058, 88.4907],
+"Baharampur": [24.0988, 88.2670],
+"Malda": [25.0108, 88.1411],
+"Balurghat": [25.2373, 88.7831],
+"Raiganj": [25.6160, 88.1227],
+"Cooch Behar": [26.3452, 89.4482],
+"Jalpaiguri": [26.5435, 88.7200],
+"Alipurduar": [26.4919, 89.5271],
+"Purulia": [23.3321, 86.3652],
+"Bankura": [23.2324, 87.0784],
+"Bishnupur": [23.0730, 87.3199],
+"Medinipur": [22.4257, 87.3199],
+"Kharagpur": [22.3460, 87.2320],
+"Tamluk": [22.3000, 87.9250],
+"Haldia": [22.0667, 88.0698]
+};
+
+
+// =====================================================
+// DISTANCE BETWEEN TWO LOCATIONS
+// =====================================================
+
+function cityDistance(lat1, lon1, lat2, lon2) {
+
+const R = 6371;
+
+const dLat =
+    (lat2 - lat1) * Math.PI / 180;
+
+const dLon =
+    (lon2 - lon1) * Math.PI / 180;
+
+const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) *
+    Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) ** 2;
+
+return R * 2 *
+    Math.atan2(
+        Math.sqrt(a),
+        Math.sqrt(1 - a)
+    );
+}
+
+
+// =====================================================
+// FIND NEAREST CITY
+// =====================================================
+
+function findNearestCity(latitude, longitude) {
+
+let nearestCity = null;
+let shortestDistance = Infinity;
+
+Object.entries(cityCoordinates).forEach(
+    ([city, coordinates]) => {
+
+        const distance = cityDistance(
+            latitude,
+            longitude,
+            coordinates[0],
+            coordinates[1]
+        );
+
+        if (distance < shortestDistance) {
+
+            shortestDistance = distance;
+            nearestCity = city;
+
+        }
+
+    }
+);
+
+return {
+    city: nearestCity,
+    distance: shortestDistance
+};
+}
+        const clubs = [
+            {
+                name: "Bagbazar Sarbojanin",
+                city: "Kolkata",
+                area: "Bagbazar",
+                query: "Bagbazar Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Kumartuli Park",
+                city: "Kolkata",
+                area: "Kumartuli",
+                query: "Kumartuli Park Durga Puja Kolkata"
+            },
+            {
+                name: "College Square Durga Puja",
+                city: "Kolkata",
+                area: "College Square",
+                query: "College Square Durga Puja Kolkata"
+            },
+            {
+                name: "Ahiritola Sarbojanin",
+                city: "Kolkata",
+                area: "Ahiritola",
+                query: "Ahiritola Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Sreebhumi Sporting Club",
+                city: "Kolkata",
+                area: "Lake Town",
+                query: "Sreebhumi Sporting Club Durga Puja Kolkata"
+            },
+            {
+                name: "Belgachia Sarbojanin",
+                city: "Kolkata",
+                area: "Belgachia",
+                query: "Belgachia Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Hatibagan Sarbojanin",
+                city: "Kolkata",
+                area: "Hatibagan",
+                query: "Hatibagan Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Nalin Sarkar Street",
+                city: "Kolkata",
+                area: "Nalin Sarkar Street",
+                query: "Nalin Sarkar Street Durga Puja Kolkata"
+            },
+            {
+                name: "Sikdar Bagan Sadharan Durgotsav",
+                city: "Kolkata",
+                area: "Sikdar Bagan",
+                query: "Sikdar Bagan Sadharan Durga Puja Kolkata"
+            },
+            {
+                name: "Dum Dum Park Tarun Sangha",
+                city: "Kolkata",
+                area: "Dum Dum Park",
+                query: "Dum Dum Park Tarun Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Dum Dum Park Bharat Chakra",
+                city: "Kolkata",
+                area: "Dum Dum Park",
+                query: "Dum Dum Park Bharat Chakra Durga Puja Kolkata"
+            },
+            {
+                name: "Tala Barowari Durgotsab",
+                city: "Kolkata",
+                area: "Tala",
+                query: "Tala Barowari Durgotsab Kolkata"
+            },
+            {
+                name: "Tala Prattoy",
+                city: "Kolkata",
+                area: "Tala",
+                query: "Tala Prattoy Durga Puja Kolkata"
+            },
+            {
+                name: "Ekdalia Evergreen Club",
+                city: "Kolkata",
+                area: "Ballygunge",
+                query: "Ekdalia Evergreen Club Durga Puja Kolkata"
+            },
+            {
+                name: "Chetla Agrani Club",
+                city: "Kolkata",
+                area: "Chetla",
+                query: "Chetla Agrani Club Durga Puja Kolkata"
+            },
+            {
+                name: "Deshapriya Park",
+                city: "Kolkata",
+                area: "Deshapriya Park",
+                query: "Deshapriya Park Durga Puja Kolkata"
+            },
+            {
+                name: "Singhi Park Sarbojanin",
+                city: "Kolkata",
+                area: "Singhi Park",
+                query: "Singhi Park Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Ballygunge Cultural Association",
+                city: "Kolkata",
+                area: "Ballygunge",
+                query: "Ballygunge Cultural Association Durga Puja Kolkata"
+            },
+            {
+                name: "Tridhara Sammilani",
+                city: "Kolkata",
+                area: "Deshapriya Park",
+                query: "Tridhara Sammilani Durga Puja Kolkata"
+            },
+            {
+                name: "Samaj Sebi Sangha",
+                city: "Kolkata",
+                area: "Ballygunge",
+                query: "Samaj Sebi Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Hindustan Club",
+                city: "Kolkata",
+                area: "Gariahat",
+                query: "Hindustan Club Durga Puja Kolkata"
+            },
+            {
+                name: "Hindustan Park Sarbojanin",
+                city: "Kolkata",
+                area: "Hindustan Park",
+                query: "Hindustan Park Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Badamtala Ashar Sangha",
+                city: "Kolkata",
+                area: "Kalighat",
+                query: "Badamtala Ashar Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "66 Pally Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Kalighat",
+                query: "66 Pally Durga Puja Kolkata"
+            },
+            {
+                name: "64 Pally Durga Puja",
+                city: "Kolkata",
+                area: "Kalighat",
+                query: "64 Pally Durga Puja Kolkata"
+            },
+            {
+                name: "Mudiali Club",
+                city: "Kolkata",
+                area: "Mudiali",
+                query: "Mudiali Club Durga Puja Kolkata"
+            },
+            {
+                name: "Suruchi Sangha",
+                city: "Kolkata",
+                area: "New Alipore",
+                query: "Suruchi Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Jodhpur Park",
+                city: "Kolkata",
+                area: "Jodhpur Park",
+                query: "Jodhpur Park Durga Puja Kolkata"
+            },
+            {
+                name: "Bosepukur Sitala Mandir",
+                city: "Kolkata",
+                area: "Bosepukur",
+                query: "Bosepukur Sitala Mandir Durga Puja Kolkata"
+            },
+            {
+                name: "Bosepukur Talbagan",
+                city: "Kolkata",
+                area: "Bosepukur",
+                query: "Bosepukur Talbagan Durga Puja Kolkata"
+            },
+            {
+                name: "Rajdanga Naba Uday Sangha",
+                city: "Kolkata",
+                area: "Rajdanga",
+                query: "Rajdanga Naba Uday Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Babu Bagan Club",
+                city: "Kolkata",
+                area: "Babu Bagan",
+                query: "Babu Bagan Club Durga Puja Kolkata"
+            },
+            {
+                name: "Selimpur Pally",
+                city: "Kolkata",
+                area: "Selimpur",
+                query: "Selimpur Pally Durga Puja Kolkata"
+            },
+            {
+                name: "Naktala Udayan Sangha",
+                city: "Kolkata",
+                area: "Naktala",
+                query: "Naktala Udayan Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Maddox Square",
+                city: "Kolkata",
+                area: "Ballygunge",
+                query: "Maddox Square Durga Puja Kolkata"
+            },
+            {
+                name: "Shiv Mandir Sarbojanin",
+                city: "Kolkata",
+                area: "Ballygunge",
+                query: "Shiv Mandir Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Behala Nutan Dal",
+                city: "Kolkata",
+                area: "Behala",
+                query: "Behala Nutan Dal Durga Puja Kolkata"
+            },
+            {
+                name: "Behala Club",
+                city: "Kolkata",
+                area: "Behala",
+                query: "Behala Club Durga Puja Kolkata"
+            },
+            {
+                name: "Barisha Sarbojanin",
+                city: "Kolkata",
+                area: "Barisha",
+                query: "Barisha Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Ghasbagan Sporting Club",
+                city: "Howrah",
+                area: "Salkia",
+                query: "Ghasbagan Sporting Club Durga Puja Howrah"
+            },
+            {
+                name: "Howrah Saraswati Club",
+                city: "Howrah",
+                area: "Kadam Tala",
+                query: "Howrah Saraswati Club Durga Puja"
+            },
+            {
+                name: "Salkia Durgotsav Barowari",
+                city: "Howrah",
+                area: "Salkia",
+                query: "Salkia Durgotsav Barowari Howrah"
+            },
+            {
+                name: "Salkia Sadharan Durga Puja",
+                city: "Howrah",
+                area: "Salkia",
+                query: "Salkia Sadharan Durga Puja Howrah"
+            },
+            {
+                name: "Shibpur Sastitala Durga Puja",
+                city: "Howrah",
+                area: "Shibpur",
+                query: "Shibpur Sastitala Durga Puja Howrah"
+            },
+            {
+                name: "Court Road Puja Committee",
+                city: "Asansol",
+                area: "Court Road",
+                query: "Court Road Puja Committee Asansol"
+            },
+            {
+                name: "Asansol Police Line Durga Puja",
+                city: "Asansol",
+                area: "Police Line",
+                query: "Asansol Police Line Durga Puja"
+            },
+            {
+                name: "Gopal Math Durga Puja",
+                city: "Durgapur",
+                area: "Gopal Math",
+                query: "Gopal Math Durga Puja Durgapur"
+            },
+            {
+                name: "Ambuja Urvashi Durga Puja Sarbojanin Samiti",
+                city: "Durgapur",
+                area: "Durgapur",
+                query: "Ambuja Urvashi Durga Puja Sarbojanin Samiti Durgapur"
+            },
+            {
+                name: "Marconi Dakshin Palli Sarbojanin Durga Puja Samiti",
+                city: "Durgapur",
+                area: "Marconi",
+                query: "Marconi Dakshin Palli Durga Puja Durgapur"
+            },
+            {
+                name: "Shankarpur Sarbojanin Durga Puja Samiti",
+                city: "Durgapur",
+                area: "Shankarpur",
+                query: "Shankarpur Sarbojanin Durga Puja Samiti Durgapur"
+            },
+            {
+                name: "Agrani Sanskritik Sarbojanin Samiti",
+                city: "Durgapur",
+                area: "Durgapur",
+                query: "Agrani Sanskritik Sarbojanin Samiti Durgapur"
+            },
+            {
+                name: "Pioneer Athletic Club",
+                city: "Barasat",
+                area: "Barasat Station",
+                query: "Pioneer Athletic Club Barasat"
+            },
+            {
+                name: "K.N.C. Regiment",
+                city: "Barasat",
+                area: "Barasat",
+                query: "KNC Regiment Barasat Puja"
+            },
+            {
+                name: "Nabapally Association",
+                city: "Barasat",
+                area: "Nabapally",
+                query: "Nabapally Association Durga Puja Barasat"
+            },
+            {
+                name: "Nabapally Amra Sobai Club",
+                city: "Barasat",
+                area: "Nabapally",
+                query: "Nabapally Amra Sobai Club Barasat"
+            },
+            {
+                name: "Deshbandhupara Durga Puja",
+                city: "Siliguri",
+                area: "Deshbandhupara",
+                query: "Deshbandhupara Durga Puja Siliguri"
+            },
+            {
+                name: "Amtala Yuba Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Amtala Yuba Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Milanpally Sarbojanin Durga Puja Committee",
+                city: "Siliguri",
+                area: "Milanpally",
+                query: "Milanpally Sarbojanin Durga Puja Committee Siliguri"
+            },
+            {
+                name: "Rathkhola Sporting Club",
+                city: "Siliguri",
+                area: "Rathkhola",
+                query: "Rathkhola Sporting Club Durga Puja Siliguri"
+            },
+            {
+                name: "Salugara Durga Puja Committee",
+                city: "Siliguri",
+                area: "Salugara",
+                query: "Salugara Durga Puja Committee Siliguri"
+            },
+            {
+                name: "Arabinda Nagar Arabinda Sangha",
+                city: "Howrah",
+                area: "Arabinda Nagar",
+                query: "Arabinda Nagar Arabinda Sangha Durga Puja Howrah"
+            },
+            {
+                name: "Arupara Sarbojanin Durgotsab Committee",
+                city: "Howrah",
+                area: "Arupara",
+                query: "Arupara Sarbojanin Durgotsab Committee Howrah"
+            },
+            {
+                name: "Azad Hind Sangha",
+                city: "Howrah",
+                area: "Howrah",
+                query: "Azad Hind Sangha Durga Puja Howrah"
+            },
+            {
+                name: "Balitikuri Netaji Balak Sangha",
+                city: "Howrah",
+                area: "Balitikuri",
+                query: "Balitikuri Netaji Balak Sangha Howrah"
+            },
+            {
+                name: "Bantra Mohila Sangha",
+                city: "Howrah",
+                area: "Bantra",
+                query: "Bantra Mohila Sangha Durga Puja Howrah"
+            },
+            {
+                name: "Bantra Nabin Sangha",
+                city: "Howrah",
+                area: "Bantra",
+                query: "Bantra Nabin Sangha Durga Puja Howrah"
+            },
+            {
+                name: "Salkia Baroari Durgotsab",
+                city: "Howrah",
+                area: "Salkia",
+                query: "Salkia Baroari Durga Puja Howrah"
+            },
+            {
+                name: "Uttar Salkia Sarbojanin Durgotsab",
+                city: "Howrah",
+                area: "Uttar Salkia",
+                query: "Uttar Salkia Sarbojanin Durga Puja Howrah"
+            },
+            {
+                name: "Abahani Chakra Sports & Cultural Club",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Abahani Chakra Sports Cultural Club Siliguri"
+            },
+            {
+                name: "Agragami Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Agragami Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Agrani Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Agrani Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Arunoday Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Arunoday Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Baghajatin Park Durgotsob Committee",
+                city: "Siliguri",
+                area: "Baghajatin Park",
+                query: "Baghajatin Park Durgotsob Committee Siliguri"
+            },
+            {
+                name: "Balaka Club",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Balaka Club Durga Puja Siliguri"
+            },
+            {
+                name: "Bharat Sevashram Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Bharat Sevashram Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Haiderpara Sporting Club",
+                city: "Siliguri",
+                area: "Haiderpara",
+                query: "Haiderpara Sporting Club Durga Puja Siliguri"
+            },
+            {
+                name: "Jagriti Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Jagriti Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Janashree Club",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Janashree Club Durga Puja Siliguri"
+            },
+            {
+                name: "Mahananda Sporting Club",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Mahananda Sporting Club Durga Puja Siliguri"
+            },
+            {
+                name: "Nabin Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Nabin Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Netaji Yuba Sangha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Netaji Yuba Sangha Durga Puja Siliguri"
+            },
+            {
+                name: "Shanti Nagar Sporting Club",
+                city: "Siliguri",
+                area: "Shanti Nagar",
+                query: "Shanti Nagar Sporting Club Durga Puja Siliguri"
+            },
+            {
+                name: "Suryanagar Sporting Club",
+                city: "Siliguri",
+                area: "Suryanagar",
+                query: "Suryanagar Sporting Club Durga Puja Siliguri"
+            },
+            {
+                name: "Tarun Tirtha",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Tarun Tirtha Durga Puja Siliguri"
+            },
+            {
+                name: "Uttoron",
+                city: "Siliguri",
+                area: "Siliguri",
+                query: "Uttoron Durga Puja Siliguri"
+            },
+            {
+                name: "Sahid Colony Sarbojanin Durga Puja",
+                city: "Barasat",
+                area: "Sahid Colony",
+                query: "Sahid Colony Sarbojanin Durga Puja Barasat"
+            },
+            {
+                name: "Taltala Durga Puja Pandal",
+                city: "Barasat",
+                area: "Taltala",
+                query: "Taltala Durga Puja Pandal Barasat"
+            },
+            {
+                name: "New Town Durga Puja Committee",
+                city: "Kolkata",
+                area: "New Town",
+                query: "New Town Durga Puja Committee Kolkata"
+            },
+            {
+                name: "Dum Dum Park Sarbojanin Durga Puja",
+                city: "Kolkata",
+                area: "Dum Dum Park",
+                query: "Dum Dum Park Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Santosh Mitra Square",
+                city: "Kolkata",
+                area: "Lalbazar",
+                query: "Santosh Mitra Square Durga Puja Kolkata"
+            },
+            {
+                name: "Ultadanga Pallyshree",
+                city: "Kolkata",
+                area: "Belgachhia / Shyambazar",
+                query: "Ultadanga Pallyshree Durga Puja Kolkata"
+            },
+            {
+                name: "Uddipani (Park Circus Sarbojanin Durgotsab)",
+                city: "Kolkata",
+                area: "Kalighat",
+                query: "Uddipani Park Circus Sarbojanin Durgotsab Kolkata"
+            },
+            {
+                name: "Shyampukur Sanghatirtha Durga Puja Samity",
+                city: "Kolkata",
+                area: "Sovabazar",
+                query: "Shyampukur Sanghatirtha Durga Puja Samity Kolkata"
+            },
+            {
+                name: "Chotushkone Park Saradia Sammilani",
+                city: "Kolkata",
+                area: "Kalighat",
+                query: "Chotushkone Park Saradia Sammilani Kolkata"
+            },
+            {
+                name: "Ariadaha Jubak Sangha",
+                city: "Kolkata",
+                area: "Dakshineswar",
+                query: "Ariadaha Jubak Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Ramkrishapur Sarbojanin Durgotsab",
+                city: "Howrah",
+                area: "Howrah Maidan",
+                query: "Ramkrishapur Sarbojanin Durgotsab Howrah"
+            },
+            {
+                name: "Alpha Atheletic Association",
+                city: "Kolkata",
+                area: "Machuabazar",
+                query: "Alpha Atheletic Association Durga Puja Kolkata"
+            },
+            {
+                name: "Adi Lake Pally",
+                city: "Kolkata",
+                area: "Lake Market",
+                query: "Adi Lake Pally Durga Puja Kolkata"
+            },
+            {
+                name: "Debdaru Fatak Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Behala",
+                query: "Debdaru Fatak Sarbojanin Durgotsab Kolkata"
+            },
+            {
+                name: "Hartaki Bagan Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Manicktala",
+                query: "Hartaki Bagan Sarbojanin Durgotsab Kolkata"
+            },
+            {
+                name: "Barisha Tarun Tirtha",
+                city: "Kolkata",
+                area: "Sakher Bazar",
+                query: "Barisha Tarun Tirtha Durga Puja Kolkata"
+            },
+            {
+                name: "Beleghata Sarbojanin Durga Puja Committee",
+                city: "Kolkata",
+                area: "Phoolbagan",
+                query: "Beleghata Sarbojanin Durga Puja Committee Kolkata"
+            },
+            {
+                name: "Behala 29 Palli",
+                city: "Kolkata",
+                area: "New Alipore",
+                query: "Behala 29 Palli Durga Puja Kolkata"
+            },
+            {
+                name: "Nirvik Sangha",
+                city: "Kolkata",
+                area: "Baguiati",
+                query: "Nirvik Sangha Durga Puja Baguiati Kolkata"
+            },
+            {
+                name: "Keshtopur Prafulla Kanan Paschim Adhibasi Brinda",
+                city: "Kolkata",
+                area: "Kestopur",
+                query: "Keshtopur Prafulla Kanan Paschim Adhibasi Brinda Kolkata"
+            },
+            {
+                name: "Sobhabazar Burtolla Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Sovabazar",
+                query: "Sobhabazar Burtolla Sarbojanin Durgotsab Kolkata"
+            },
+            {
+                name: "Ajeyo Sanhati",
+                city: "Kolkata",
+                area: "Haridevpur",
+                query: "Ajeyo Sanhati Durga Puja Haridevpur Kolkata"
+            },
+            {
+                name: "Tekiapara Sarbojanin Durgotsab Committee",
+                city: "Kolkata",
+                area: "Shyambazar",
+                query: "Tekiapara Sarbojanin Durgotsab Committee Kolkata"
+            },
+            {
+                name: "Jorabagan Chhatra Sanghaati",
+                city: "Kolkata",
+                area: "Jorabagan",
+                query: "Jorabagan Chhatra Sanghaati Durga Puja Kolkata"
+            },
+            {
+                name: "Udayan Sangha",
+                city: "Kolkata",
+                area: "Entally",
+                query: "Udayan Sangha Durga Puja Entally Kolkata"
+            },
+            {
+                name: "Boral Sukanta Sangha",
+                city: "Kolkata",
+                area: "Boral",
+                query: "Boral Sukanta Sangha Durga Puja Kolkata"
+            },
+            {
+                name: "Beliaghata Nabamilan",
+                city: "Kolkata",
+                area: "Phoolbagan",
+                query: "Beliaghata Nabamilan Durga Puja Kolkata"
+            },
+            {
+                name: "Chorbagan Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Rammohan Sarani",
+                query: "Chorbagan Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Manicktala Chaltabagan Lohapatty Durga Puja",
+                city: "Kolkata",
+                area: "Manicktala",
+                query: "Manicktala Chaltabagan Lohapatty Durga Puja Kolkata"
+            },
+            {
+                name: "Telengabagan Sarbojanin Durgotsab",
+                city: "Kolkata",
+                area: "Ultadanga",
+                query: "Telengabagan Sarbojanin Durga Puja Kolkata"
+            },
+            {
+                name: "Kashi Bose Lane Durga Puja Samity",
+                city: "Kolkata",
+                area: "Manicktala",
+                query: "Kashi Bose Lane Durga Puja Samity Kolkata"
+            },
+            {
+                name: "Pathuriaghata Pancher Palli",
+                city: "Kolkata",
+                area: "Pathuriaghata",
+                query: "Pathuriaghata Pancher Palli Durga Puja Kolkata"
+            },
+            {
+                name: "Haridevpur 41 Pally",
+                city: "Kolkata",
+                area: "Haridevpur",
+                query: "Haridevpur 41 Pally Durga Puja Kolkata"
+            },
+            {
+                name: "Salt Lake FD Block Sarbojanin",
+                city: "Kolkata",
+                area: "Salt Lake FD Block",
+                query: "Salt Lake FD Block Durga Puja Kolkata"
+            },
+            {
+                name: "Salt Lake BJ Block Sarbojanin",
+                city: "Kolkata",
+                area: "Salt Lake BJ Block",
+                query: "Salt Lake BJ Block Durga Puja Kolkata"
+            },
+            {
+                name: "Salt Lake AK Block Sarbojanin",
+                city: "Kolkata",
+                area: "Salt Lake AK Block",
+                query: "Salt Lake AK Block Durga Puja Kolkata"
+            },
+            {
+                name: "Salt Lake AJ Block Sarbojanin",
+                city: "Kolkata",
+                area: "Salt Lake AJ Block",
+                query: "Salt Lake AJ Block Durga Puja Kolkata"
+            }
+        ];
+
+
+        /*
+        ==================================================
+        DISPLAY
+        ==================================================
+        */
+
+        const clubList = document.getElementById("clubList");
+        const seeMoreBtn = document.getElementById("seeMoreBtn");
+        const searchBox = document.getElementById("searchBox");
+
+        let visibleCount = 8;
+
+
+        function createMapURL(query) {
+
+            return "https://www.google.com/maps/search/?api=1&query="
+                + encodeURIComponent(query);
+
+        }
+
+        function createEmbedMapURL(query) {
+
+            return "https://maps.google.com/maps?q="
+                + encodeURIComponent(query)
+                + "&t=&z=14&ie=UTF8&iwloc=&output=embed";
+
+        }
+
+
+        function displayClubs(data) {
+
+            clubList.innerHTML = "";
+
+            if (data.length === 0) {
+
+                clubList.innerHTML =
+                    '<div class="empty">কোনো Puja Club পাওয়া যায়নি।</div>';
+
+                seeMoreBtn.style.display = "none";
+
+                return;
+            }
+
+
+            const visibleClubs = data.slice(0, visibleCount);
+
+
+            visibleClubs.forEach(club => {
+
+                const card = document.createElement("div");
+
+                card.className = "club-card";
+
+                card.innerHTML = `
+
+                    <div class="club-name">
+                         ${club.name}
+                    </div>
+
+                    <div class="club-area">
+                         ${club.area}, ${club.city}
+                    </div>
+
+                    <div class="map-embed-wrapper" style="margin: 12px 0; border-radius: 10px; overflow: hidden; height: 160px; background: rgba(0,0,0,0.06); box-shadow: inset 0 0 4px rgba(0,0,0,0.1);">
+                        <iframe
+                            title="${club.name} Map"
+                            width="100%"
+                            height="160"
+                            style="border:0; display: block;"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="${createEmbedMapURL(club.query)}"
+                        ></iframe>
+                    </div>
+
+                    <a
+                        class="map-btn"
+                        href="${createMapURL(club.query)}"
+                        target="_blank"
+                    >
+                        Google Maps →
+                    </a>
+
+                `;
+
+                clubList.appendChild(card);
+
+            });
+
+
+            if (visibleCount >= data.length) {
+
+                seeMoreBtn.style.display = "none";
+
+            } else {
+
+                seeMoreBtn.style.display = "block";
+
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        SEE MORE
+        ==================================================
+        */
+
+        seeMoreBtn.addEventListener("click", () => {
+
+            visibleCount += 8;
+
+            displayClubs(clubs);
+
+        });
+
+
+        /*
+        ==================================================
+        SEARCH
+        ==================================================
+        */
+
+        searchBox.addEventListener("input", () => {
+
+            const text =
+                searchBox.value.toLowerCase().trim();
+
+
+            if (!text) {
+
+                visibleCount = 8;
+
+                displayClubs(clubs);
+
+                return;
+
+            }
+
+
+            const filtered = clubs.filter(club => {
+
+                return (
+
+                    club.name.toLowerCase().includes(text) ||
+
+                    club.area.toLowerCase().includes(text) ||
+
+                    club.city.toLowerCase().includes(text)
+
+                );
+
+            });
+
+
+            visibleCount = filtered.length;
+
+            displayClubs(filtered);
+
+        });
+
+
+        /*
+        ==================================================
+        INITIAL LOAD
+        ==================================================
+        */
+        navigator.geolocation.getCurrentPosition(
+    function(position) {
+        console.log("User location:", 
+            position.coords.latitude,
+            position.coords.longitude
+        );
+    },
+    function(error) {
+        console.log("Location permission denied.");
+    }
+);
+        displayClubs(clubs);
+        
+
+    </script>
+
+
+</body>
+</html>
