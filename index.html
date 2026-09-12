@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dugga </title>
+    <link rel="icon" type="icon/png" href="./assets/icon/icon.image.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">দুগ্গা</div>
+
+            <div class="nav-links">
+                <a href="gallery.html">GALLERY</a>
+                <a href="#" onclick="openAbout(event)">DEVELOPERS</a>
+                <a href="#" onclick="openRating(event)">RATE US</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+                <p class="eyebrow">শারদ উৎসব ২০২৬</p>
+
+                <h1 id="fastivalText">গৌরী এলো</h1>
+
+                <p class="subtitle">
+                    আলো, আনন্দ আর মায়ের আগমনে
+                    আবারও ভরে উঠুক চারপাশ।
+                </p>
+
+                <div class="hero-buttons">
+                    <button id="startJourneyBtn">
+                        PANDAL HOPPING
+                    </button>
+                    <button class="secondary" onclick="window.location.href='gallery.html'">
+                        PUJA GALLERY
+                    </button>
+                </div>
+
+                <div class="countdown">
+                    <p class="countdown-title">পুজো আর বাকি </p>
+
+                    <div class="countdown-boxes">
+
+                        <div class="time-box">
+                            <span id="days">00</span>
+                            <small>দিন</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="hours">00</span>
+                            <small>ঘণ্টা</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="minutes">00</span>
+                            <small>মিনিট</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="seconds">00</span>
+                            <small>সেকেন্ড</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pandal">
+                <div class="pandal-roof"></div>
+                <div class="pandal-body">
+                    <div class="pandal-door"></div>
+                </div>
+            </div>
+
+        </section>
+        </section> <!-- HERO ENDS HERE -->
+
+
+        <!-- MUSIC -->
+        <!-- MUSIC -->
+        <section class="music-section">
+
+            <div class="music-buttons">
+                <button class="music-btn" onclick="showMusic('mahalaya')">
+                    মহালয়া
+                </button>
+
+
+                <button class="music-btn" onclick="showMusic('dhak')">
+                    ঢাক
+                </button>
+            </div>
+
+            <div id="musicDisplay" class="music-display"></div>
+
+
+            <!-- ================================
+     RATING POPUP
+================================ -->
+
+            <div id="ratingPopup" class="rating-popup">
+
+                <div class="rating-box">
+
+                    <button class="rating-close" onclick="closeRating()">
+                        ×
+                    </button>
+
+                    <span class="rating-label">
+                        YOUR FEEDBACK
+                    </span>
+
+                    <h2> Rate Us</h2>
+
+                    <p>
+                        How did you like our Puja experience?
+                    </p>
+
+                    <div class="stars">
+
+                        <span data-rating="1">★</span>
+                        <span data-rating="2">★</span>
+                        <span data-rating="3">★</span>
+                        <span data-rating="4">★</span>
+                        <span data-rating="5">★</span>
+
+                    </div>
+
+                    <div id="rating-text">
+                        Rate our website
+                    </div>
+
+                    <button id="submit-rating">
+                        Submit Rating
+                    </button>
+
+                </div>
+
+            </div>
+
+
+    </main>
+
+
+    <!-- ================================
+     ABOUT POPUP
+================================ -->
+
+    <div id="aboutPopup" class="about-popup">
+
+        <div class="about-box">
+
+            <button class="about-close" type="button" onclick="closeAbout()">
+                ×
+            </button>
+
+            <div class="about-icon">
+
+            </div>
+
+            <h2>About</h2>
+
+            <p class="about-subtitle">
+                Website Developers
+            </p>
+
+            <div class="developer">
+                <h4>Rajib Pradhan</h4>
+
+
+                <p>Frontend Developer</p>
+
+                <div class="social-links">
+
+                    <a href="https://www.linkedin.com/in/rajib-pradhan-42505432b?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank" title="LinkedIn">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+                    <a href="https://github.com/rajibpradhan45" target="_blank" title="GitHub">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="developer">
+                <h4>Bipul Maity</h4>
+
+
+                <p>Backend Developer</p>
+
+                <div class="social-links">
+
+                    <a href="https://www.linkedin.com/in/bipul-maity-88726637a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank" title="LinkedIn">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+                    <a href="https://github.com/Bipulmaity06" target="_blank" title="GitHub">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="developer">
+                <h4>Sukhamoy Bhowmick</h4>
+
+
+                <p>Music Collection</p>
+
+                <div class="social-links">
+
+                    <a href="https://www.linkedin.com/in/shukhamoy-bhowmick-48770332b?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank" title="LinkedIn">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+                    <a href="https://github.com/Sukhamoyb2006" target="_blank" title="GitHub">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </a>
+
+                </div>
+            </div>
+
+            <p class="about-footer">
+                Team Dugga
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+         AUTH MODAL — Rating login gate
+         Reuses the same CSS classes as gallery.html
+    ================================ -->
+    <div id="ratingAuthModal" class="lightbox-modal" style="display:none;">
+        <div class="auth-content">
+            <button class="lightbox-close" id="ratingAuthClose" aria-label="Close">&times;</button>
+            <h2 id="ratingAuthTitle">Login to Rate</h2>
+
+            <button id="ratingGoogleLoginBtn" class="auth-google-btn">
+                <i class="fa-brands fa-google"></i> Continue with Google
+            </button>
+
+            <div class="auth-divider"><span>OR</span></div>
+
+            <form id="ratingAuthForm" class="auth-form">
+                <input type="email" id="ratingAuthEmail" placeholder="Email address" required>
+                <input type="password" id="ratingAuthPassword" placeholder="Password" required>
+                <button type="submit" id="ratingAuthSubmitBtn" class="auth-submit-btn">Login</button>
+            </form>
+
+            <p class="auth-switch">
+                <span id="ratingAuthSwitchText">Don't have an account?</span>
+                <a href="#" id="ratingAuthSwitchLink">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+    <script type="module">
+        /* ============================================================
+           FIREBASE — Rating system (Dugga 1.0)
+           Flow:
+             1. User clicks RATE US → popup opens.
+             2. If not logged in → show login gate.
+             3. On login → check Firestore: ratings/{uid} already exists?
+                  YES → disable stars + button, show "already rated" state.
+                  NO  → allow rating input.
+             4. On submit → write to Firestore, then show success state.
+             5. Duplicate check is Firestore-backed (survives refresh/logout).
+           ============================================================ */
+        import { db, auth } from "./firebase-config.js";
+        import {
+            doc, getDoc, setDoc, serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import {
+            GoogleAuthProvider, signInWithPopup,
+            createUserWithEmailAndPassword, signInWithEmailAndPassword,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        /* ── DOM refs ─────────────────────────────────────────────── */
+        const ratingStars      = document.querySelectorAll("#ratingPopup .stars span");
+        const ratingSubmit     = document.getElementById("submit-rating");
+        const ratingTextBox    = document.getElementById("rating-text");
+
+        const ratingAuthModal      = document.getElementById("ratingAuthModal");
+        const ratingAuthClose      = document.getElementById("ratingAuthClose");
+        const ratingAuthTitle      = document.getElementById("ratingAuthTitle");
+        const ratingGoogleLoginBtn = document.getElementById("ratingGoogleLoginBtn");
+        const ratingAuthForm       = document.getElementById("ratingAuthForm");
+        const ratingAuthEmail      = document.getElementById("ratingAuthEmail");
+        const ratingAuthPassword   = document.getElementById("ratingAuthPassword");
+        const ratingAuthSubmitBtn  = document.getElementById("ratingAuthSubmitBtn");
+        const ratingAuthSwitchText = document.getElementById("ratingAuthSwitchText");
+        const ratingAuthSwitchLink = document.getElementById("ratingAuthSwitchLink");
+
+        /* ── State ────────────────────────────────────────────────── */
+        let currentUser  = null;
+        let isSignUpMode = false;
+
+        /* ── Auth state listener ──────────────────────────────────── */
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+        });
+
+        /* ── Rating UI helpers ────────────────────────────────────── */
+
+        /** Lock the rating popup into the "already rated" state. */
+        function showAlreadyRatedState() {
+            // Disable all stars
+            ratingStars.forEach((s) => {
+                s.style.pointerEvents = "none";
+                s.style.opacity = "0.5";
+            });
+            // Disable submit button
+            ratingSubmit.disabled    = true;
+            ratingSubmit.textContent = "Already Rated ✓";
+            // Show message
+            ratingTextBox.innerHTML =
+                "<strong>You have already submitted your feedback. ❤️</strong><br>" +
+                "<span style='font-size:0.9em;opacity:0.8;'>Thank you for your response.</span>";
+        }
+
+        /** Lock the popup into the "just submitted successfully" state. */
+        function showSuccessState() {
+            ratingStars.forEach((s) => {
+                s.classList.remove("active");
+                s.style.pointerEvents = "none";
+                s.style.opacity = "0.5";
+            });
+            ratingSubmit.disabled    = true;
+            ratingSubmit.textContent = "Rated ✓";
+            ratingTextBox.innerHTML =
+                "<strong>Thank You for Rating! ❤️</strong><br>" +
+                "<span style='font-size:0.9em;opacity:0.8;'>Your feedback has been submitted successfully.</span>";
+            window.selectedRating = 0;
+        }
+
+        /**
+         * Check Firestore for an existing rating by this user.
+         * Returns true if a rating already exists, false otherwise.
+         * Throws if the read itself fails unexpectedly.
+         */
+        async function userHasAlreadyRated(uid) {
+            const snap = await getDoc(doc(db, "ratings", uid));
+            return snap.exists();
+        }
+
+        /* ── Auth modal helpers ───────────────────────────────────── */
+        function openRatingAuthModal() {
+            ratingAuthModal.style.display = "flex";
+        }
+        function closeRatingAuthModal() {
+            ratingAuthModal.style.display = "none";
+            ratingAuthForm.reset();
+        }
+
+        ratingAuthClose.addEventListener("click", closeRatingAuthModal);
+        ratingAuthModal.addEventListener("click", (e) => {
+            if (e.target === ratingAuthModal) closeRatingAuthModal();
+        });
+
+        /* Toggle Login / Sign Up */
+        ratingAuthSwitchLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            isSignUpMode = !isSignUpMode;
+            if (isSignUpMode) {
+                ratingAuthTitle.textContent      = "Sign Up";
+                ratingAuthSubmitBtn.textContent  = "Sign Up";
+                ratingAuthSwitchText.textContent = "Already have an account?";
+                ratingAuthSwitchLink.textContent = "Login";
+            } else {
+                ratingAuthTitle.textContent      = "Login to Rate";
+                ratingAuthSubmitBtn.textContent  = "Login";
+                ratingAuthSwitchText.textContent = "Don't have an account?";
+                ratingAuthSwitchLink.textContent = "Sign Up";
+            }
+        });
+
+        /* Google Login */
+        const googleProvider = new GoogleAuthProvider();
+        ratingGoogleLoginBtn.addEventListener("click", async () => {
+            try {
+                await signInWithPopup(auth, googleProvider);
+                closeRatingAuthModal();
+                // After login, immediately check if this user has already rated
+                await checkAndApplyRatingState();
+            } catch (err) {
+                alert("Google Login Error: " + err.message);
+            }
+        });
+
+        /* Email Login / Sign Up */
+        ratingAuthForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email    = ratingAuthEmail.value;
+            const password = ratingAuthPassword.value;
+            try {
+                if (isSignUpMode) {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                }
+                closeRatingAuthModal();
+                // After login, immediately check if this user has already rated
+                await checkAndApplyRatingState();
+            } catch (err) {
+                alert("Authentication Error: " + err.message);
+            }
+        });
+
+        /* ── Core: check rating state and update popup UI ─────────── */
+        /**
+         * Called whenever the popup becomes visible with an authenticated user.
+         * Reads Firestore to decide whether to show the rating form or the
+         * "already rated" state. Works after any page refresh or re-login.
+         */
+        async function checkAndApplyRatingState() {
+            const user = currentUser || auth.currentUser;
+            if (!user) return; // not logged in — nothing to check yet
+
+            ratingTextBox.textContent = "Checking your rating status...";
+            ratingSubmit.disabled     = true;
+
+            try {
+                const alreadyRated = await userHasAlreadyRated(user.uid);
+                if (alreadyRated) {
+                    showAlreadyRatedState();
+                } else {
+                    // Reset to normal rating-ready state
+                    ratingStars.forEach((s) => {
+                        s.style.pointerEvents = "";
+                        s.style.opacity       = "";
+                    });
+                    ratingSubmit.disabled    = false;
+                    ratingSubmit.textContent = "Submit Rating";
+                    ratingTextBox.textContent = "Rate our website";
+                }
+            } catch (err) {
+                console.error("Could not check rating status:", err);
+                // On error, still allow the form — worst case the write will fail
+                ratingSubmit.disabled    = false;
+                ratingSubmit.textContent = "Submit Rating";
+                ratingTextBox.textContent = "Rate our website";
+            }
+        }
+
+        /* ── openRating: called by the RATE US nav link ──────────── */
+        // Override the global openRating defined in script.js so we can run
+        // the Firestore check every time the popup is opened.
+        window._ratingModuleReady = async function () {
+            const user = currentUser || auth.currentUser;
+            if (!user) {
+                // Not logged in — show the login gate
+                ratingTextBox.textContent = "Please login to rate.";
+                openRatingAuthModal();
+                return;
+            }
+            await checkAndApplyRatingState();
+        };
+
+        /* Hook into the RATE US link — runs after the popup is shown. */
+        document.querySelector("a[onclick=\"openRating(event)\"]")
+            ?.addEventListener("click", () => {
+                // Give the popup a tick to appear, then check rating status
+                setTimeout(() => window._ratingModuleReady(), 50);
+            });
+
+        /* ── Rating Submit ────────────────────────────────────────── */
+        ratingSubmit.addEventListener("click", async () => {
+
+            // 1. Must be logged in
+            const user = currentUser || auth.currentUser;
+            if (!user) {
+                ratingTextBox.textContent = "Please login to rate.";
+                openRatingAuthModal();
+                return;
+            }
+
+            // 2. Must have selected a star
+            const selected = (typeof window.selectedRating !== "undefined")
+                ? window.selectedRating : 0;
+            if (selected === 0) {
+                ratingTextBox.textContent = "Please select a rating first. ⭐";
+                return;
+            }
+
+            // 3. Lock button while in flight
+            ratingSubmit.disabled    = true;
+            ratingSubmit.textContent = "Submitting...";
+
+            try {
+                const uid       = user.uid;
+                const ratingRef = doc(db, "ratings", uid);
+
+                // 4. Firestore duplicate check (persists across refresh/re-login)
+                const alreadyRated = await userHasAlreadyRated(uid);
+                if (alreadyRated) {
+                    showAlreadyRatedState();
+                    return;
+                }
+
+                // 5. Write to Firestore — document ID = UID
+                //    Matches rule: allow create if uid == ratingId && data.userId == uid
+                await setDoc(ratingRef, {
+                    userId:    uid,
+                    userName:  user.displayName || "",
+                    userEmail: user.email       || "",
+                    rating:    selected,
+                    timestamp: serverTimestamp()
+                });
+
+                // 6. SUCCESS — Firestore confirmed the write
+                showSuccessState();
+
+            } catch (err) {
+                console.error("=== RATING SAVE FAILED ===");
+                console.error("Code   :", err.code);
+                console.error("Message:", err.message);
+
+                ratingSubmit.disabled    = false;
+                ratingSubmit.textContent = "Submit Rating";
+                ratingTextBox.textContent = "Could not save your rating. Please try again.";
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
